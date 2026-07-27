@@ -19,7 +19,7 @@ export function Packages() {
               <p className="px-3 font-display text-4xl text-gold sm:px-0">R{item.price}<span className="ml-1 font-sans text-xs text-muted">/ month</span></p>
               <div className="flex items-center gap-2 px-3 sm:justify-end sm:px-0">
                 <a href={whatsappUrl(`Hello Nyoni, I would like to enquire about the ${item.members}-member option at R${item.price} per month.`)} target="_blank" rel="noreferrer" aria-label={`Ask about the ${item.members}-member option on WhatsApp`} className="focus-ring grid size-11 place-items-center border border-charcoal/20 hover:border-gold hover:text-gold"><MessageCircle size={18} /></a>
-                <a href={`/?option=${item.members}#join`} className="focus-ring inline-flex min-h-11 items-center gap-3 bg-charcoal px-5 py-3 text-xs font-bold uppercase tracking-widest text-cream hover:bg-gold">Apply now <ArrowUpRight size={16} /></a>
+                <a href={`?option=${item.members}#join`} className="focus-ring inline-flex min-h-11 items-center gap-3 bg-charcoal px-5 py-3 text-xs font-bold uppercase tracking-widest text-cream hover:bg-gold">Apply now <ArrowUpRight size={16} /></a>
               </div>
             </Reveal>
           ))}
