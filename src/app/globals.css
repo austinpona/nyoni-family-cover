@@ -9,7 +9,9 @@
   --color-gold: #89662f;
   --color-light-gold: #c5a165;
   --color-muted: #5f625f;
-  --color-whatsapp: #25d366;
+  --color-whatsapp: #24764b;
+  --color-ink: #22211f;
+  --color-surface-dark: #5f5d58;
   --font-sans: var(--font-franklin);
   --font-display: var(--font-barlow);
   --font-serif: var(--font-cormorant);
@@ -32,15 +34,17 @@ a, button, input, select, textarea { outline-offset: 3px; }
 .section-pad { padding-block: clamp(4rem, 8vw, 7rem); }
 .paper-grain { background-image: radial-gradient(circle at 15% 20%, rgb(197 161 101 / .045), transparent 24rem), url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.018'/%3E%3C/svg%3E"); }
 .ledger-line { border-color: color-mix(in oklch, #a96f0b, transparent 70%); }
-.focus-ring { transition: color .2s, background-color .2s, border-color .2s, transform .2s; }
+.focus-ring { transition: color 160ms ease-out, background-color 160ms ease-out, border-color 160ms ease-out, transform 160ms ease-out; }
+.focus-ring:active, button:active { transform: scale(.97); }
 .focus-ring:focus-visible { outline: 2px solid #89662f; outline-offset: 3px; }
 .glass-light { background: rgb(255 253 249 / .74); border: 1px solid rgb(255 255 255 / .72); box-shadow: 0 24px 70px -45px rgb(41 40 37 / .4), inset 0 1px 0 rgb(255 255 255 / .8); backdrop-filter: blur(18px) saturate(115%); -webkit-backdrop-filter: blur(18px) saturate(115%); }
 .glass-dark { background: rgb(86 82 76 / .72); border: 1px solid rgb(255 255 255 / .15); box-shadow: 0 24px 70px -42px rgb(0 0 0 / .5), inset 0 1px 0 rgb(255 255 255 / .11); backdrop-filter: blur(18px) saturate(100%); -webkit-backdrop-filter: blur(18px) saturate(100%); }
+.support-ledger { background: rgb(34 33 31 / .72); border: 1px solid rgb(255 255 255 / .14); box-shadow: 0 32px 80px -50px rgb(0 0 0 / .8), inset 0 1px 0 rgb(255 255 255 / .1); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .glass-light { background: #fffdf9; }
   .glass-dark { background: #56524c; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
 }

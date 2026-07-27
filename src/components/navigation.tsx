@@ -28,7 +28,7 @@ export function Navigation() {
         <nav aria-label="Main navigation" className="hidden items-center gap-6 lg:flex">
           {links.map(([label, href]) => <a key={href} href={href} className="focus-ring text-[.7rem] font-semibold uppercase tracking-[.1em] text-muted hover:text-gold">{label}</a>)}
         </nav>
-        <div className="hidden items-center gap-3 sm:flex">
+        <div className="hidden items-center gap-3 lg:flex">
           <a href="tel:+27636021868" className="focus-ring inline-flex items-center gap-2 px-3 py-2 text-xs font-semibold"><Phone size={15} aria-hidden="true" />063 602 1868</a>
           <a href="#join" className="focus-ring rounded-md bg-charcoal px-5 py-3 text-xs font-bold uppercase tracking-widest text-cream hover:bg-gold">Join Nyoni</a>
         </div>

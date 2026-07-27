@@ -8,10 +8,10 @@ export function Reveal({ children, className = "", delay = 0 }: { children: Reac
   return (
     <motion.div
       className={className}
-      initial={reduced ? false : { opacity: 0, y: 20 }}
+      initial={false}
       whileInView={reduced ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.18 }}
-      transition={{ duration: .55, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: .42, delay, ease: [0.22, 1, 0.36, 1] }}
     >{children}</motion.div>
   );
 }

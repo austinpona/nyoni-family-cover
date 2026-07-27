@@ -6,9 +6,9 @@ export function TrustIntro() {
     <section className="paper-grain bg-cream py-16 sm:py-24">
       <div className="container-shell grid gap-10 border-y border-charcoal/15 py-12 lg:grid-cols-[.72fr_1.28fr] lg:items-center">
         <Reveal>
-          <div className="glass-dark rounded-xl border-l-4 border-l-gold p-8 text-cream sm:p-10">
+          <div className="glass-dark rounded-xl p-8 text-cream sm:p-10">
             <HeartHandshake className="text-light-gold" size={36} aria-hidden="true" />
-            <p className="serif-title mt-8 text-3xl font-semibold leading-tight sm:text-4xl">“Family support should be clear, practical and within reach.”</p>
+            <p className="mt-8 max-w-md font-display text-4xl font-semibold uppercase leading-[1.02] sm:text-5xl">“Family support should be clear, practical and within reach.”</p>
             <p className="mt-6 text-xs font-bold uppercase tracking-[.2em] text-light-gold">We are family</p>
           </div>
         </Reveal>

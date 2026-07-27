@@ -6,10 +6,10 @@ export function Packages() {
   return (
     <section id="packages" className="paper-grain bg-cream pb-20 sm:pb-28">
       <div className="container-shell">
-        <Reveal className="mx-auto max-w-3xl text-center">
+        <Reveal className="max-w-3xl">
           <p className="eyebrow">Basic monthly options</p>
           <h2 className="display-title mt-4 text-5xl sm:text-7xl">One family. A plan that fits.</h2>
-          <p className="mx-auto mt-5 max-w-xl leading-7 text-muted">Select the number of family members you want to register. Every option includes the same basic benefits.</p>
+          <p className="mt-5 max-w-xl leading-7 text-muted">Select the number of family members you want to register. Every option includes the same basic benefits.</p>
         </Reveal>
         <div className="mt-12 border-y border-charcoal/20">
           <div className="hidden grid-cols-[1.2fr_.8fr_1fr] border-b border-charcoal/15 py-3 text-[.65rem] font-bold uppercase tracking-[.14em] text-muted sm:grid"><span>Registered family</span><span>Monthly payment</span><span className="text-right">Choose an option</span></div>
