@@ -22,7 +22,7 @@ const businessSchema = {
   telephone: "+27636021868",
   slogan: "We Are Family",
   areaServed: { "@type": "Country", name: "South Africa" },
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://nyoni-support.vercel.app",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://austinpona.github.io/nyoni-family-cover",
 };
 
 export default function Home() {
