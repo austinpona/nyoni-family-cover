@@ -1,8 +1,10 @@
 name: Deploy website to GitHub Pages
 
+# The site is deployed by Vercel now. This workflow is kept as a fallback but
+# no longer runs on push - trigger it manually from the Actions tab if GitHub
+# Pages is ever needed again. Note that next.config.ts no longer sets
+# output:"export", which this workflow requires, so it would need that restored.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:

@@ -1,12 +1,12 @@
 import type { NextConfig } from "next";
 
-const isGitHubPages = process.env.GITHUB_ACTIONS === "true";
-
+// Deployed on Vercel, which runs a real Next.js server. The static export and
+// basePath juggling below existed only because GitHub Pages serves the site
+// from a subfolder and cannot run a server.
 const nextConfig: NextConfig = {
-  output: "export",
-  basePath: isGitHubPages ? "/nyoni-family-cover" : "",
-  assetPrefix: isGitHubPages ? "/nyoni-family-cover/" : "",
-  images: { unoptimized: true },
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
 };
 
 export default nextConfig;
