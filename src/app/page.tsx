@@ -6,6 +6,7 @@ import { Faq } from "@/components/faq";
 import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
 import { HowItWorks } from "@/components/how-it-works";
+import { Marquee } from "@/components/marquee";
 import { Navigation } from "@/components/navigation";
 import { Packages } from "@/components/packages";
 import { TrustIntro } from "@/components/trust-intro";
@@ -22,7 +23,7 @@ const businessSchema = {
   telephone: "+27636021868",
   slogan: "We Are Family",
   areaServed: { "@type": "Country", name: "South Africa" },
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://austinpona.github.io/nyoni-family-cover",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://nyonicover.co.za",
 };
 
 export default function Home() {
@@ -35,6 +36,7 @@ export default function Home() {
       <main id="main-content">
         <Hero />
         <TrustStrip />
+        <Marquee />
         <TrustIntro />
         <Packages />
         <Benefits />

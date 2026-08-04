@@ -8,7 +8,7 @@ const barlow = Barlow_Condensed({ subsets: ["latin"], weight: ["500", "600", "70
 const cormorant = Cormorant_Garamond({ subsets: ["latin"], weight: ["500", "600", "700"], variable: "--font-cormorant", display: "swap" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://nyoni-support.vercel.app"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://nyonicover.co.za"),
   title: { default: "Nyoni | Affordable Community Funeral Support", template: "%s | Nyoni" },
   description: "Explore affordable Nyoni monthly support options for families, including practical food, transport and community assistance during difficult times.",
   keywords: ["Nyoni", "funeral support", "community support", "family support", "South Africa", "Limpopo"],

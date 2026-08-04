@@ -12,6 +12,6 @@ const facts = [
 ] as const;
 
 export function TrustStrip() {
-  return <section aria-label="Nyoni membership facts" className="bg-slate text-cream"><div className="container-shell grid grid-cols-2 lg:grid-cols-4">{facts.map(({ value, prefix, suffix, label, icon: Icon }) => <motion.div key={label} initial={false} className="border-b border-r border-white/15 px-4 py-6 last:border-r-0 lg:border-b-0 lg:px-6"><Icon size={20} className="mb-4 text-light-gold" aria-hidden="true" /><p className="font-display text-2xl uppercase sm:text-3xl"><NumberTicker value={value} prefix={prefix} suffix={suffix} /></p><p className="mt-1 text-[.65rem] font-semibold uppercase tracking-[.13em] text-white/75">{label}</p></motion.div>)}</div></section>;
+  return <section aria-label="Nyoni membership facts" className="border-t border-gold/30 bg-deep-black text-cream"><div className="container-shell grid grid-cols-2 lg:grid-cols-4">{facts.map(({ value, prefix, suffix, label, icon: Icon }, index) => <motion.div key={label} initial={false} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: index * .05 }} className="border-b border-r border-white/12 px-4 py-7 last:border-r-0 lg:border-b-0 lg:px-6"><Icon size={20} className="mb-4 text-light-gold" aria-hidden="true" /><p className="font-display text-3xl uppercase sm:text-4xl"><NumberTicker value={value} prefix={prefix} suffix={suffix} /></p><p className="mt-2 text-[.65rem] font-semibold uppercase tracking-[.13em] text-white/85">{label}</p></motion.div>)}</div></section>;
 }
 
