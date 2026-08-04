@@ -6,7 +6,6 @@ import { Faq } from "@/components/faq";
 import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
 import { HowItWorks } from "@/components/how-it-works";
-import { Marquee } from "@/components/marquee";
 import { Navigation } from "@/components/navigation";
 import { Packages } from "@/components/packages";
 import { TrustIntro } from "@/components/trust-intro";
@@ -34,14 +33,16 @@ export default function Home() {
       <ScrollProgress />
       <Navigation />
       <main id="main-content">
+        {/* Ordered around the two days that matter: the day you join, and the
+            day you need it. What arrives leads, because it is the one thing
+            no competitor states this plainly. */}
         <Hero />
         <TrustStrip />
-        <Marquee />
-        <TrustIntro />
-        <Packages />
         <Benefits />
-        <HowItWorks />
+        <Packages />
         <WaitingPeriod />
+        <TrustIntro />
+        <HowItWorks />
         <Conditions />
         <ApplicationForm />
         <Faq />

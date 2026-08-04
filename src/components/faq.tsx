@@ -7,7 +7,7 @@ const faqs = [
   ["What happens if I miss payments?", "Three months without payment may cause the membership to lapse. Outstanding payments must be settled before claiming."],
   ["How do I submit a claim?", "Contact Nyoni for the current claim process. Claims are subject to Department of Home Affairs verification."],
   ["When are benefits delivered?", "Qualifying benefits are provided within two days after verification."],
-  ["Can one person be registered more than once?", "Only one cow is issued. Affected members receive R1,500 where the same person was registered by more than one family member."],
+  ["Why is there a six-month waiting period?", "It protects members who are already paying. Without it, someone could join in the week they need to claim, and the fund could not support families who have contributed for years. It applies to everyone equally."],
   ["Are add-ons included in the basic price?", "No. On the Go and Food Support are separate options at R70 per month each."],
   ["How can I contact Nyoni?", "Call or WhatsApp Nyoni on 063 602 1868."],
 ] as const;
