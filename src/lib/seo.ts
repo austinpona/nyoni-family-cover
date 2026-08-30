@@ -50,9 +50,13 @@ export function pageMetadata({ title, description, path, noindex = false }: Page
   return {
     title,
     description,
-    alternates: { canonical: url },
     openGraph: { title, description, url, type: "website", locale: "en_ZA", siteName: "Nyoni" },
     twitter: { card: "summary_large_image", title, description },
-    ...(noindex ? { robots: { index: false, follow: false } } : {}),
+    // A noindex page gets no canonical. The 404 is served at every wrong
+    // address there is, so a canonical would point at /404 — a URL that
+    // itself 404s. Saying nothing is the honest signal.
+    ...(noindex
+      ? { robots: { index: false, follow: false } }
+      : { alternates: { canonical: url } }),
   };
 }
