@@ -47,6 +47,11 @@ const nextConfig: NextConfig = {
   // Next 16; stated explicitly so an upstream default change cannot silently
   // start publishing this site's source to anyone who opens devtools.
   productionBrowserSourceMaps: false,
+  experimental: {
+    // lucide-react and framer-motion both re-export large barrels. This
+    // rewrites the named imports to deep paths so only what is used is bundled.
+    optimizePackageImports: ["lucide-react", "framer-motion"],
+  },
   async redirects() {
     return [
       {

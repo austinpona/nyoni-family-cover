@@ -1,6 +1,6 @@
 "use client";
 
-import { animate, motion, useInView, useMotionValue, useReducedMotion, useTransform } from "framer-motion";
+import { animate, m, useInView, useMotionValue, useReducedMotion, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
 
 export function NumberTicker({ value, prefix = "", suffix = "" }: { value: number; prefix?: string; suffix?: string }) {
@@ -16,5 +16,5 @@ export function NumberTicker({ value, prefix = "", suffix = "" }: { value: numbe
     return controls.stop;
   }, [count, inView, reduced, value]);
 
-  return <span ref={ref}>{prefix}<motion.span>{rounded}</motion.span>{suffix}</span>;
+  return <span ref={ref}>{prefix}<m.span>{rounded}</m.span>{suffix}</span>;
 }
