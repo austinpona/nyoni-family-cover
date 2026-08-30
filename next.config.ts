@@ -33,9 +33,32 @@ const csp = [
   "upgrade-insecure-requests",
 ].join("; ");
 
+/**
+ * The apex host, derived from the same env var the canonical tags use, so the
+ * redirect can never disagree with the canonical.
+ */
+const canonicalHost = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://nyonicover.co.za").host;
+
 const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
+  },
+  // Source maps are not emitted for production browser bundles by default in
+  // Next 16; stated explicitly so an upstream default change cannot silently
+  // start publishing this site's source to anyone who opens devtools.
+  productionBrowserSourceMaps: false,
+  async redirects() {
+    return [
+      {
+        // www -> apex, permanent. Done here rather than in the Vercel dashboard
+        // so it lives in version control and survives a re-import. Both hosts
+        // currently answer 200, which is three copies of one site to Google.
+        source: "/:path*",
+        has: [{ type: "host", value: `www.${canonicalHost}` }],
+        destination: `https://${canonicalHost}/:path*`,
+        permanent: true,
+      },
+    ];
   },
   async headers() {
     return [
@@ -57,6 +80,14 @@ const nextConfig: NextConfig = {
             value: "max-age=63072000; includeSubDomains; preload",
           },
         ],
+      },
+      {
+        // Vercel preview deployments are a third copy of the site, and
+        // nyoni-family-cover.vercel.app currently answers 200. Tell crawlers to
+        // ignore every preview host; the apex is the only indexable one.
+        source: "/:path*",
+        has: [{ type: "host", value: "(?<previewHost>.*\\.vercel\\.app)" }],
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
       },
     ];
   },
