@@ -49,7 +49,10 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#111111" };
+// #181714 is --color-deep-black from globals.css. It was #111111, which is
+// close enough to look right and wrong enough to show a seam against the
+// header on mobile Chrome.
+export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#181714" };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
