@@ -1,7 +1,10 @@
 import { MessageCircle } from "lucide-react";
 import { whatsappUrl } from "@/lib/site-data";
 
-const faqs = [
+// Exported so /faq can build its FAQPage JSON-LD from the same array the page
+// renders. Markup that disagrees with the visible answer is the usual reason
+// Google rejects an FAQ rich result.
+export const faqs = [
   ["What is the waiting period?", "The waiting period is 6 months. Monthly payments must be maintained before a qualifying claim can be considered."],
   ["Who can be included?", "Nyoni offers options for 2, 3, 4, 5 or 8 members. Contact Nyoni for guidance on who qualifies."],
   ["What happens if I miss payments?", "A missed month pauses your six-month count — it does not reset it, and your progress is never lost. Three months without payment and the membership lapses, but pay again and it is active again. Nyoni is not a lender: if you stop paying, you owe Nyoni nothing."],

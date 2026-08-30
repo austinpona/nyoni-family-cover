@@ -34,6 +34,12 @@ interface PageMeta {
   title: string;
   description: string;
   path: string;
+  /**
+   * Set when the title already carries the brand, to bypass the root layout's
+   * "%s | Nyoni" template. Without it, "Contact Nyoni" renders as
+   * "Contact Nyoni | Nyoni".
+   */
+  absoluteTitle?: boolean;
   /** Set for the 404 and anything else Google must not index. */
   noindex?: boolean;
 }
@@ -45,10 +51,16 @@ interface PageMeta {
  * and nyoni-family-cover.vercel.app are three copies of the same site as far
  * as Google is concerned, and it picks the winner, not us.
  */
-export function pageMetadata({ title, description, path, noindex = false }: PageMeta): Metadata {
+export function pageMetadata({
+  title,
+  description,
+  path,
+  absoluteTitle = false,
+  noindex = false,
+}: PageMeta): Metadata {
   const url = absoluteUrl(path);
   return {
-    title,
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     openGraph: { title, description, url, type: "website", locale: "en_ZA", siteName: "Nyoni" },
     twitter: { card: "summary_large_image", title, description },
