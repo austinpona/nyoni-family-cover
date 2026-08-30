@@ -1,7 +1,7 @@
 import { Logo } from "./logo";
-import { PHONE_DISPLAY } from "@/lib/site-data";
+import { PHONE_DISPLAY, company } from "@/lib/site-data";
 
-const links = [["Home", "#home"], ["Packages", "#packages"], ["Benefits", "#benefits"], ["How it works", "#how-it-works"], ["Conditions", "#conditions"], ["FAQ", "#faq"]] as const;
+const links = [["Home", "#home"], ["Packages", "#packages"], ["Benefits", "#benefits"], ["Who we are", "#who-we-are"], ["How it works", "#how-it-works"], ["Conditions", "#conditions"], ["FAQ", "#faq"]] as const;
 
 export function Footer() {
   return (
@@ -10,7 +10,7 @@ export function Footer() {
         <p className="serif-accent text-[clamp(2.6rem,8vw,5.5rem)] leading-none text-[#e2c99c]">We are family.</p>
       </div>
       <div className="container-shell grid gap-10 pt-10 md:grid-cols-[1fr_1fr_.7fr]">
-        <div><Logo compact inverse /><p className="mt-5 max-w-xs text-sm leading-6 text-cream/65">Dignified, practical community support for families.</p></div>
+        <div><Logo compact inverse /><p className="mt-5 max-w-xs text-sm leading-6 text-cream/65">Dignified, practical community support for families across Limpopo.</p><p className="mt-5 max-w-xs text-xs leading-5 text-cream/45">{company.registeredName}<br />Registration {company.registrationNumber}<br />{company.town}, {company.province}</p></div>
         <nav aria-label="Footer navigation" className="grid grid-cols-2 gap-3 text-sm text-cream/65">{links.map(([label, href]) => <a key={href} href={href} className="transition-colors hover:text-light-gold">{label}</a>)}</nav>
         <div><p className="text-xs font-bold uppercase tracking-widest text-light-gold">Contact</p><a href="tel:+27636021868" className="mt-3 block font-display text-2xl hover:text-light-gold">{PHONE_DISPLAY}</a><div className="mt-5 flex gap-4 text-xs text-cream/55"><a href="/terms" className="transition-colors hover:text-cream">Terms</a><a href="/privacy" className="transition-colors hover:text-cream">Privacy</a></div></div>
       </div>

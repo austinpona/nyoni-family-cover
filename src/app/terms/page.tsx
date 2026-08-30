@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/logo";
-import { packages, benefits, PHONE_DISPLAY } from "@/lib/site-data";
+import { packages, benefits, PHONE_DISPLAY, company } from "@/lib/site-data";
 
 export const metadata = { title: "Membership Terms" };
 
@@ -45,7 +45,7 @@ const sections = [
       "One or two months unpaid: your membership is behind, and we will phone you.",
       "Three or more months unpaid: the membership has lapsed and cannot be claimed on.",
       "A lapse is not the end. Pay again and the membership becomes active, and if you return within twelve months your paid months are still counted.",
-      "Any outstanding payments must be settled before a claim can be made.",
+      "Your months must be paid up before a claim can be made. Nyoni tracks no arrears and does not lend: if you stop paying, you owe Nyoni nothing.",
     ],
   },
   {
@@ -143,7 +143,10 @@ export default function TermsPage() {
         <h2 className="mt-12 text-2xl font-bold text-charcoal">Questions</h2>
         <p className="mt-4 leading-7 text-muted">
           Phone <a className="font-semibold text-gold" href={tel}>{PHONE_DISPLAY}</a>.
-          Nyoni is run by two partners and operates in Limpopo.
+          Nyoni is run by {company.manager}, {company.managerRole.toLowerCase()}, from{" "}
+          {company.town}, and serves {company.province}. The registered entity is{" "}
+          {company.registeredName}, registration {company.registrationNumber}. Registration
+          confirms the company exists; it is not an approval, guarantee or insurance licence.
         </p>
 
         <Link href="/" className="mt-12 inline-block text-sm font-bold text-gold">← Return home</Link>

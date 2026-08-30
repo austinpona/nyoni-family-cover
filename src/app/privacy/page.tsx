@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/logo";
-import { PHONE_DISPLAY } from "@/lib/site-data";
+import { PHONE_DISPLAY, company } from "@/lib/site-data";
 
 export const metadata = { title: "Privacy Notice" };
 
@@ -148,7 +148,9 @@ export default function PrivacyPage() {
 
         <h2 className="mt-12 text-2xl font-bold text-charcoal">Who to contact</h2>
         <p className="mt-4 leading-7 text-muted">
-          Nyoni operates in Limpopo and is run by two partners. For anything in this
+          The responsible party under POPIA is {company.registeredName}, registration{" "}
+          {company.registrationNumber}, of {company.town}, {company.province}. Nyoni is run
+          by {company.manager}, {company.managerRole.toLowerCase()}. For anything in this
           notice, phone{" "}
           <a className="font-semibold text-gold" href={`tel:+27${PHONE_DISPLAY.replace(/\D/g, "").slice(1)}`}>
             {PHONE_DISPLAY}

@@ -46,3 +46,6 @@ server.*.log
 preview.*.log
 
 .vercel
+
+# Loose working materials, not source. Kept on disk, out of git history.
+/nyoni new poster/

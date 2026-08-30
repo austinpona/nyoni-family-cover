@@ -4,7 +4,7 @@ import { whatsappUrl } from "@/lib/site-data";
 const faqs = [
   ["What is the waiting period?", "The waiting period is 6 months. Monthly payments must be maintained before a qualifying claim can be considered."],
   ["Who can be included?", "Nyoni offers options for 2, 3, 4, 5 or 8 members. Contact Nyoni for guidance on who qualifies."],
-  ["What happens if I miss payments?", "Three months without payment may cause the membership to lapse. Outstanding payments must be settled before claiming."],
+  ["What happens if I miss payments?", "A missed month pauses your six-month count — it does not reset it, and your progress is never lost. Three months without payment and the membership lapses, but pay again and it is active again. Nyoni is not a lender: if you stop paying, you owe Nyoni nothing."],
   ["How do I submit a claim?", "Contact Nyoni for the current claim process. Claims are subject to Department of Home Affairs verification."],
   ["When are benefits delivered?", "Qualifying benefits are provided within two days after verification."],
   ["Why is there a six-month waiting period?", "It protects members who are already paying. Without it, someone could join in the week they need to claim, and the fund could not support families who have contributed for years. It applies to everyone equally."],

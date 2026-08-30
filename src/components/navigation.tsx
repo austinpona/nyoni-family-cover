@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Logo } from "./logo";
 import { whatsappUrl } from "@/lib/site-data";
 
-const links = [["Packages", "#packages"], ["Benefits", "#benefits"], ["How it works", "#how-it-works"], ["Conditions", "#conditions"], ["FAQ", "#faq"]] as const;
+const links = [["Packages", "#packages"], ["Benefits", "#benefits"], ["Who we are", "#who-we-are"], ["How it works", "#how-it-works"], ["Conditions", "#conditions"], ["FAQ", "#faq"]] as const;
 
 export function Navigation() {
   const [open, setOpen] = useState(false);
@@ -22,7 +22,7 @@ export function Navigation() {
 
   return (
     <header className={`glass-light fixed inset-x-0 top-0 z-50 border-x-0 border-t-0 transition-shadow ${scrolled ? "shadow-[0_12px_35px_-24px_rgba(41,40,37,.55)]" : ""}`}>
-      <div className="hidden bg-charcoal text-cream sm:block"><div className="container-shell flex h-8 items-center justify-between text-[.65rem] font-semibold uppercase tracking-[.12em]"><p>Practical support for South African families</p><a href={whatsappUrl("Hello Nyoni, I would like help with membership.")} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-[#d8bd8a] hover:text-white"><MessageCircle size={13} />Speak to Nyoni on WhatsApp</a></div></div>
+      <div className="hidden bg-charcoal text-cream sm:block"><div className="container-shell flex h-8 items-center justify-between text-[.65rem] font-semibold uppercase tracking-[.12em]"><p>Practical support for families across Limpopo</p><a href={whatsappUrl("Hello Nyoni, I would like help with membership.")} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-[#d8bd8a] hover:text-white"><MessageCircle size={13} />Speak to Nyoni on WhatsApp</a></div></div>
       <div className="container-shell flex h-[72px] items-center justify-between">
         <a href="#home" aria-label="Nyoni home"><Logo compact /></a>
         <nav aria-label="Main navigation" className="hidden items-center gap-6 lg:flex">
