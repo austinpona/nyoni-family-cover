@@ -1,8 +1,14 @@
 import Link from "next/link";
 import { Logo } from "@/components/logo";
 import { packages, benefits, PHONE_DISPLAY, company } from "@/lib/site-data";
+import { PAGES, pageMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Membership Terms" };
+export const metadata = pageMetadata({
+  title: "Membership Terms",
+  description:
+    "The decided conditions of Nyoni membership: what you pay, the six-month waiting period, what lapsing means, and how qualifying claims are verified.",
+  path: PAGES.terms.path,
+});
 
 /*
   Written 9 August 2026. Replaces a placeholder saying the terms "have not yet

@@ -1,26 +1,52 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { Barlow_Condensed, Cormorant_Garamond, Libre_Franklin } from "next/font/google";
+import { SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
 const franklin = Libre_Franklin({ subsets: ["latin"], variable: "--font-franklin", display: "swap" });
 const barlow = Barlow_Condensed({ subsets: ["latin"], weight: ["500", "600", "700"], variable: "--font-barlow", display: "swap" });
 const cormorant = Cormorant_Garamond({ subsets: ["latin"], weight: ["500", "600", "700"], variable: "--font-cormorant", display: "swap" });
 
+/*
+  No `icons` key and no explicit `openGraph.images` here on purpose. Both are
+  supplied by the App Router file conventions — icon.png, apple-icon.png and
+  opengraph-image.png in this directory — which emit the correct dimensions
+  automatically. Declaring them here would override those files and put the
+  1100x1430 portrait logo back into a 1200x630 slot, which every social
+  platform crops into an unrecognisable strip.
+*/
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://nyonicover.co.za"),
-  title: { default: "Nyoni | Affordable Community Funeral Support", template: "%s | Nyoni" },
-  description: "Explore affordable Nyoni monthly support options for families, including practical food, transport and community assistance during difficult times.",
-  keywords: ["Nyoni", "funeral support", "community support", "family support", "South Africa", "Limpopo"],
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Nyoni Family Cover | Funeral Support in Limpopo",
+    template: "%s | Nyoni",
+  },
+  description:
+    "Community funeral support in Limpopo from R100 a month. One cow, 100kg of maize meal, firewood and a bakkie for the day, after six paid months.",
+  applicationName: "Nyoni",
+  alternates: { canonical: SITE_URL },
+  keywords: [
+    "funeral cover Limpopo",
+    "affordable funeral support South Africa",
+    "community funeral membership",
+    "Nyoni family cover",
+    "Phalaborwa funeral support",
+  ],
   openGraph: {
-    title: "Nyoni | Affordable Community Funeral Support",
-    description: "Practical, affordable community support for families during difficult times.",
+    title: "Nyoni Family Cover | Funeral Support in Limpopo",
+    description: "Practical, affordable community funeral support for families across Limpopo.",
+    url: SITE_URL,
+    siteName: "Nyoni",
     type: "website",
     locale: "en_ZA",
-    images: [{ url: "/images/nyoni-logo.png", width: 1100, height: 1430, alt: "Nyoni cow and sunrise logo" }],
   },
-  twitter: { card: "summary_large_image", title: "Nyoni | We Are Family", description: "Affordable community funeral-support membership for families.", images: ["/images/nyoni-logo.png"] },
-  icons: { icon: "/logo.svg", apple: "/logo.svg" },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nyoni Family Cover | Funeral Support in Limpopo",
+    description: "Practical, affordable community funeral support for families across Limpopo.",
+  },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#111111" };

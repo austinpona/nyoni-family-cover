@@ -1,8 +1,14 @@
 import Link from "next/link";
 import { Logo } from "@/components/logo";
 import { PHONE_DISPLAY, company } from "@/lib/site-data";
+import { PAGES, pageMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Privacy Notice" };
+export const metadata = pageMetadata({
+  title: "Privacy Notice",
+  description:
+    "What personal information Nyoni collects when you apply, why each item is needed, who it is shared with, and the POPIA rights you have over it.",
+  path: PAGES.privacy.path,
+});
 
 /*
   Written 9 August 2026. Replaces a placeholder that stated ID numbers, email
