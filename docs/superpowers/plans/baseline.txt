@@ -1,0 +1,31 @@
+
+> nyoni-site@0.1.0 build
+> next build
+
+▲ Next.js 16.2.10 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 21.5s
+  Running TypeScript ...
+  Finished TypeScript in 12.6s ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/8) ...
+  Generating static pages using 7 workers (2/8) 
+  Generating static pages using 7 workers (4/8) 
+  Generating static pages using 7 workers (6/8) 
+✓ Generating static pages using 7 workers (8/8) in 1250ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /privacy
+├ ○ /robots.txt
+├ ○ /sitemap.xml
+└ ○ /terms
+
+
+○  (Static)  prerendered as static content
+
+files=14 raw=1155550 gzip=332676
+raw_kb=1128 gzip_kb=324
