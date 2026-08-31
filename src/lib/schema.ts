@@ -1,14 +1,11 @@
 import { SITE_URL, absoluteUrl } from "./seo";
-import { company } from "./site-data";
+import { businessHours, company } from "./site-data";
 
 /*
   Every value here already appears on the site. Note what is deliberately
   absent, and do not add it:
 
   - No `streetAddress`. The registered office is a private home.
-  - No `openingHours`. Nobody has confirmed them, and inventing opening hours
-    for a funeral business is the kind of small lie that costs a family a call
-    on the worst day of their life.
   - No `priceRange`, no `aggregateRating`. There are no reviews. Fabricating
     social proof on a funeral product is fraud.
   - `LocalBusiness`, never `InsuranceAgency` or `FinancialService`. Nyoni is
@@ -33,6 +30,15 @@ export const organizationSchema = {
   logo: absoluteUrl("/icons/icon-512.png"),
   image: absoluteUrl("/opengraph-image.png"),
   areaServed: { "@type": "AdministrativeArea", name: "Limpopo, South Africa" },
+  // Confirmed by Austin, 31 August 2026. Read from site-data so this and the
+  // visible contact section cannot disagree — if Google and the page state
+  // different hours, Google's version is the one a family acts on.
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: businessHours.schema.days,
+    opens: businessHours.schema.opens,
+    closes: businessHours.schema.closes,
+  },
   address: {
     "@type": "PostalAddress",
     addressLocality: company.town,

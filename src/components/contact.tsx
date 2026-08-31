@@ -1,5 +1,5 @@
-import { Building2, MapPin, MessageCircle, Phone } from "lucide-react";
-import { PHONE_DISPLAY, company, whatsappUrl } from "@/lib/site-data";
+import { Clock, MapPin, MessageCircle, Phone } from "lucide-react";
+import { PHONE_DISPLAY, businessHours, company, whatsappUrl } from "@/lib/site-data";
 import { Reveal } from "./reveal";
 
 export function Contact() {
@@ -10,11 +10,11 @@ export function Contact() {
           <div><h2 className="display-title max-w-3xl text-5xl sm:text-7xl">Your family should not <span className="serif-accent text-gold">face it alone.</span></h2><p className="mt-5 max-w-xl leading-7 text-muted">Ask about membership, add-ons, applications or claims.</p></div>
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:mt-0"><a href={whatsappUrl("Hello Nyoni, I would like to speak to your team.")} target="_blank" rel="noreferrer" className="focus-ring flex min-h-12 items-center justify-center gap-3 bg-charcoal px-5 py-4 text-xs font-bold uppercase tracking-widest text-cream hover:bg-gold"><MessageCircle size={18} />WhatsApp</a><a href="tel:+27636021868" className="focus-ring flex min-h-12 items-center justify-center gap-3 border border-charcoal/30 px-5 py-4 text-xs font-bold uppercase tracking-widest hover:border-gold hover:text-gold"><Phone size={18} />Call now</a></div>
         </div>
-        <div className="grid gap-6 pt-8 sm:grid-cols-3"><div className="flex gap-3"><Phone size={18} className="mt-1 text-gold" /><div><p className="text-xs font-bold uppercase tracking-wider">Contact</p><a href="tel:+27636021868" className="mt-1 block text-sm">{PHONE_DISPLAY}</a></div></div>{/* Operating area is a known, verified fact and now says so. Business
-              hours are NOT known — nobody has confirmed them — so this column
-              carries the registered town instead of inventing opening times
-              for a funeral business. Add hours here only once they are real. */}
-          <div className="flex gap-3"><MapPin size={18} className="mt-1 text-gold" /><div><p className="text-xs font-bold uppercase tracking-wider">Operating area</p><p className="mt-1 text-sm text-muted">{company.areaServed}</p></div></div><div className="flex gap-3"><Building2 size={18} className="mt-1 text-gold" /><div><p className="text-xs font-bold uppercase tracking-wider">Based in</p><p className="mt-1 text-sm text-muted">{company.town}, {company.province}</p></div></div></div>
+        <div className="grid gap-6 pt-8 sm:grid-cols-3"><div className="flex gap-3"><Phone size={18} className="mt-1 text-gold" /><div><p className="text-xs font-bold uppercase tracking-wider">Contact</p><a href="tel:+27636021868" className="mt-1 block text-sm">{PHONE_DISPLAY}</a></div></div>{/* Both facts here are verified: the operating area from the CIPC
+              record, the hours confirmed by Austin on 31 August 2026. Neither
+              is invented, and both read from site-data so this column, the
+              JSON-LD and the Google Business Profile cannot drift apart. */}
+          <div className="flex gap-3"><MapPin size={18} className="mt-1 text-gold" /><div><p className="text-xs font-bold uppercase tracking-wider">Operating area</p><p className="mt-1 text-sm text-muted">{company.areaServed}</p></div></div><div className="flex gap-3"><Clock size={18} className="mt-1 text-gold" /><div><p className="text-xs font-bold uppercase tracking-wider">Business hours</p><p className="mt-1 text-sm text-muted">{businessHours.display}</p><p className="mt-1 text-sm text-muted">{company.town}, {company.province}</p></div></div></div>
       </Reveal>
     </section>
   );

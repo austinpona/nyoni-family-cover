@@ -60,6 +60,26 @@ export const company = {
   areaServed: "Limpopo. All of it.",
 } as const;
 
+/**
+ * Business hours. Confirmed by Austin on 31 August 2026.
+ *
+ * One source of truth for three consumers: the contact section, the
+ * LocalBusiness JSON-LD in lib/schema.ts, and the Google Business Profile.
+ * If these ever disagree, Google shows whichever it likes and a family is
+ * given the wrong information — so change this constant, never the copies.
+ *
+ * `display` is for people. `schema` is the machine form: 24-hour times and
+ * schema.org day names, which is what OpeningHoursSpecification requires.
+ */
+export const businessHours = {
+  display: "Monday to Friday, 08:30 – 17:00",
+  schema: {
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "08:30",
+    closes: "17:00",
+  },
+} as const;
+
 export function whatsappUrl(message: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }

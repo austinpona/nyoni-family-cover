@@ -145,11 +145,18 @@ Still outstanding:
   written permission. The next delivery should be photographed.
 - How long Nyoni has operated, a verified member count, and any testimonial —
   none of which may be estimated.
-- **Verified business hours.** Still the one live gap on the contact page: that
-  column now shows the registered town instead, and `openingHours` is
-  deliberately absent from the `LocalBusiness` JSON-LD in `src/lib/schema.ts`.
-  Add both together, once the hours are real.
 - Confirmation of the exact meaning/time period of "20 loaves of bread per day".
+- **An after-hours answer.** The published hours are Monday to Friday,
+  08:30–17:00, and deaths do not keep office hours. Nothing on the site
+  currently tells a family what to do at 21:00 on a Saturday. That is a copy
+  decision, not a bug, but it is the most likely real-world gap left.
+
+Business hours were confirmed on 31 August 2026: **Monday to Friday,
+08:30–17:00**. They live in `businessHours` in `src/lib/site-data.ts` and are
+read by both the contact section and the `openingHoursSpecification` in
+`src/lib/schema.ts`. Change the constant, never the copies — if the page and
+Google disagree, Google's version is the one a family acts on. Keep the Google
+Business Profile in step with it too.
 
 The domain is settled: `nyonicover.co.za`, live, with `NEXT_PUBLIC_SITE_URL`
 already set correctly in Vercel production.
