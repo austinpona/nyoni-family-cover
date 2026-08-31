@@ -48,6 +48,19 @@ export const metadata: Metadata = {
     description: "Practical, affordable community funeral support for families across Limpopo.",
   },
   robots: { index: true, follow: true },
+  /*
+    Google Search Console verification.
+
+    Set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION in Vercel to the content value
+    Google gives you under "HTML tag", then redeploy. Nothing renders while it
+    is unset, so this is safe to leave in place — and leaving it in means the
+    property stays verified after every future deploy.
+
+    The token is not a secret. It only proves control of this domain.
+  */
+  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+    : undefined,
 };
 
 // #181714 is --color-deep-black from globals.css. It was #111111, which is
