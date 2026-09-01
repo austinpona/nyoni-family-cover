@@ -1,5 +1,5 @@
 import { SITE_URL, absoluteUrl } from "./seo";
-import { businessHours, company } from "./site-data";
+import { EMAIL, businessHours, company } from "./site-data";
 
 /*
   Every value here already appears on the site. Note what is deliberately
@@ -26,8 +26,9 @@ export const organizationSchema = {
     "Community funeral-support membership providing practical support to families during difficult times.",
   slogan: "We Are Family",
   telephone: "+27636021868",
+  email: EMAIL,
   url: SITE_URL,
-  logo: absoluteUrl("/icons/icon-512.png"),
+  logo: absoluteUrl("/images/nyoni-logo-lockup.png"),
   image: absoluteUrl("/opengraph-image.png"),
   areaServed: { "@type": "AdministrativeArea", name: "Limpopo, South Africa" },
   // Confirmed by Austin, 31 August 2026. Read from site-data so this and the
@@ -49,6 +50,7 @@ export const organizationSchema = {
     "@type": "ContactPoint",
     telephone: "+27636021868",
     contactType: "customer service",
+    email: EMAIL,
     areaServed: "ZA",
     availableLanguage: ["en"],
   },

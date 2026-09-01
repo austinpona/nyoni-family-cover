@@ -1,6 +1,16 @@
 export const WHATSAPP_NUMBER = "27636021868";
 export const PHONE_DISPLAY = "063 602 1868";
 
+/**
+ * Public contact address. Confirmed by Austin on 31 August 2026.
+ *
+ * Note the application form still deliberately does NOT email anything — it
+ * builds a WhatsApp message the visitor sends themselves, so ID numbers never
+ * travel through a mail server. This address is for enquiries, not for
+ * receiving applications. See the POPIA note in README before changing that.
+ */
+export const EMAIL = "austin@nyonicover.co.za";
+
 interface MembershipPackage {
   members: number;
   price: number;

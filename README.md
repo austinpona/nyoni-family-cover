@@ -161,7 +161,13 @@ Business Profile in step with it too.
 The domain is settled: `nyonicover.co.za`, live, with `NEXT_PUBLIC_SITE_URL`
 already set correctly in Vercel production.
 
-No address, email, registration number, licence, social account or insurance/FSP
+The public email address `austin@nyonicover.co.za` was confirmed on 31 August
+2026 and lives in `EMAIL` in `src/lib/site-data.ts`. Note it is for **enquiries
+only** — the application form still builds a WhatsApp message the visitor sends
+themselves, so ID numbers never travel through a mail server. Do not wire the
+form to send email without the POPIA review noted above.
+
+No address, registration number, licence, social account or insurance/FSP
 claim has been invented. Everything published traces to
 `../nyoni marketing tean/CLAIMS.md`.
 
