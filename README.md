@@ -77,9 +77,41 @@ constant in the script.
 
 ## Application flow and privacy
 
-There is no pretend backend. The form validates in the browser, omits the applicant’s ID number, address and email from the generated WhatsApp message, and asks the visitor to review and send it. The application is not submitted until the visitor sends the WhatsApp message.
+There is no backend. The form validates in the browser, builds a WhatsApp
+message, and opens it for the visitor to review and send themselves. Nothing is
+submitted until they press send in WhatsApp.
 
-To add a secure backend later, create a server-only route or Server Action, add rate limiting and bot protection, encrypt sensitive data, define a retention policy, and obtain professional POPIA/privacy review. Do not send ID numbers through URLs, analytics or ordinary logs.
+### What that message actually contains
+
+**It contains the applicant's ID number, email and residential address, and the
+ID number and date of birth of every additional member** — up to eight people —
+and it travels as a `wa.me/?text=` **URL**.
+
+This paragraph used to claim the opposite. It said the message omitted those
+fields, and warned against sending ID numbers through URLs, while the code did
+exactly that. `/privacy` has always described this correctly and in plain terms;
+only this file was wrong, which is worse than useless, because it is the file an
+engineer reads before touching the form.
+
+The design is a deliberate, disclosed trade-off, not an oversight: no backend
+means no database to breach and no retention policy to get wrong, and the
+visitor sees and sends the message themselves. But a URL is not a private
+channel — it lands in browser history and can be captured by anything that logs
+navigation. Under POPIA an ID number is personal information with real
+consequences.
+
+Before changing this, read the disclosure on `/privacy` and keep the two in
+step. If a backend is ever added: a server-only route or Server Action, rate
+limiting, bot protection, encryption at rest, a stated retention period, and
+professional POPIA review. At that point ID numbers must stop travelling
+through URLs entirely.
+
+### ID validation
+
+`src/lib/sa-id.ts` validates the check digit, not just the digit count. A
+mistyped ID would otherwise pass the form and only fail at Home Affairs
+verification — while the family is claiming. `npm test` covers it, including
+the property that all 108 single-digit typos are rejected.
 
 ## Configuration
 

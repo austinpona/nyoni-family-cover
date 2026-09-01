@@ -1,0 +1,88 @@
+name: CI
+
+# Runs on every push and pull request. Vercel builds on push too, but a failed
+# Vercel build is found after the fact, on a deployment nobody asked for. This
+# fails on the commit instead.
+#
+# Node is pinned to the version in .nvmrc so CI, Vercel and the local machine
+# do not quietly diverge — a build that passes on one Node major and fails on
+# another is a bad afternoon.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# A second push to the same branch cancels the first: this repo is maintained
+# on a slow connection and there is no value in queueing stale runs.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: Types
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://nyonicover.co.za
+
+      # These check the PRERENDERED HTML, not the source. Source greps produce
+      # false alarms on the comments that explain why a rule exists, and on
+      # llms.txt, which has to name the forbidden wording in order to forbid it.
+      # What matters is whether a phrase reaches a visitor.
+      - name: Guard against known regressions
+        run: |
+          set -euo pipefail
+          pages=$(find .next/server/app -name '*.html')
+          test -n "$pages" || { echo "::error::No prerendered HTML found — did the build change?"; exit 1; }
+
+          # Nyoni tracks no arrears (BUSINESS_RULES A4b). This exact line was on
+          # the printed poster and had to be stripped from the site.
+          if grep -riE "outstanding payment|settle your account|in arrears" $pages; then
+            echo "::error::Arrears wording reached a rendered page. Nyoni tracks no arrears."
+            exit 1
+          fi
+
+          # Registration is not approval. The site must never imply otherwise.
+          if grep -riE "underwritten|fsp number|approved by the|guaranteed by" $pages; then
+            echo "::error::Wording implying approval or underwriting reached a rendered page."
+            exit 1
+          fi
+
+          # The retired GitHub Pages host must never come back in a canonical,
+          # a sitemap or a link. It shipped once already.
+          if grep -r "austinpona.github.io" $pages .next/server/app/sitemap.xml.body 2>/dev/null; then
+            echo "::error::The retired GitHub Pages host is being served."
+            exit 1
+          fi
+
+          # Exactly one <h1> per page, which is the check that decays silently.
+          for f in $pages; do
+            n=$(grep -o '<h1' "$f" | wc -l)
+            if [ "$n" -ne 1 ]; then
+              echo "::error::$f has $n <h1> elements, expected exactly 1"
+              exit 1
+            fi
+          done
+
+          echo "Regression guards passed."

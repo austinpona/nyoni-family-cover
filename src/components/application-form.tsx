@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, CheckCircle2, LoaderCircle, MessageCircle, Users
 import { useEffect, useRef, useState } from "react";
 import { useForm, useWatch, type FieldPath } from "react-hook-form";
 import { z } from "zod";
+import { isValidSaIdNumber } from "@/lib/sa-id";
 import { packages, whatsappUrl } from "@/lib/site-data";
 import { SectionHeading } from "./section-heading";
 
@@ -12,16 +13,35 @@ const CONTACT_METHOD = { WHATSAPP: "WhatsApp", PHONE: "Phone call" } as const;
 const OPTION = { TWO: "2", THREE: "3", FOUR: "4", FIVE: "5", EIGHT: "8" } as const;
 const PROVINCES = ["Eastern Cape", "Free State", "Gauteng", "KwaZulu-Natal", "Limpopo", "Mpumalanga", "North West", "Northern Cape", "Western Cape"] as const;
 
+/*
+  Covered members may be left blank and filled in during follow-up — the
+  message says "To be provided" — so these fields stay optional. But when an ID
+  IS typed it must be well-formed, which it previously never was: this schema
+  accepted any string at all, so the ID numbers of the people actually being
+  covered were the only ones on the form with no validation whatsoever.
+*/
+const optionalSaId = z
+  .string()
+  .trim()
+  .refine((v) => v === "" || isValidSaIdNumber(v), "Check this ID number — a digit looks wrong.");
+
 const additionalMemberSchema = z.object({
-  fullName: z.string(),
-  idNumber: z.string(),
-  relationship: z.string(),
+  fullName: z.string().trim(),
+  idNumber: optionalSaId,
+  relationship: z.string().trim(),
   dateOfBirth: z.string(),
 });
 
 const applicationSchema = z.object({
   fullName: z.string().trim().min(2, "Enter your full name."),
-  idNumber: z.string().trim().regex(/^\d{13}$/, "Enter a 13-digit South African ID number."),
+  idNumber: z
+    .string()
+    .trim()
+    .regex(/^\d{13}$/, "Enter a 13-digit South African ID number.")
+    // The check digit catches every single-digit typo. Without it a mistyped
+    // ID is only caught at Home Affairs verification — while the family is
+    // claiming, months later.
+    .refine(isValidSaIdNumber, "Check this ID number — a digit looks wrong."),
   phone: z.string().trim().regex(/^(?:\+27|27|0)[6-8]\d{8}$/, "Enter a valid South African mobile number."),
   email: z.union([z.literal(""), z.string().trim().email("Enter a valid email address.")]),
   address: z.string().trim().min(5, "Enter your residential address."),
