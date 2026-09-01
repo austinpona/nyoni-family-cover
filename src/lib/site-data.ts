@@ -2,6 +2,17 @@ export const WHATSAPP_NUMBER = "27636021868";
 export const PHONE_DISPLAY = "063 602 1868";
 
 /**
+ * The dial string for tel: links, in E.164.
+ *
+ * This exists because the number was hardcoded in eight separate files, and on
+ * 1 September 2026 the printed poster was found carrying a completely
+ * different number (068 848 6283) from the site. One number, one place. If it
+ * ever changes, it changes here and nowhere else — and the poster, the Google
+ * Business Profile and the WhatsApp account have to be checked by hand.
+ */
+export const PHONE_E164 = "+27636021868";
+
+/**
  * Public contact address. Confirmed by Austin on 31 August 2026.
  *
  * Note the application form still deliberately does NOT email anything — it

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Logo } from "@/components/logo";
 import { Footer } from "@/components/footer";
 import { PAGES, pageMetadata } from "@/lib/seo";
-import { PHONE_DISPLAY } from "@/lib/site-data";
+import { PHONE_DISPLAY, PHONE_E164 } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   ...pageMetadata({
@@ -62,7 +62,7 @@ export default function NotFound() {
           <p className="mt-8 text-sm leading-6 text-muted">
             Or call Nyoni on{" "}
             <a
-              href="tel:+27636021868"
+              href={`tel:${PHONE_E164}`}
               className="font-semibold text-charcoal underline underline-offset-4 hover:text-gold"
             >
               {PHONE_DISPLAY}

@@ -5,7 +5,7 @@ import { Menu, MessageCircle, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Logo } from "./logo";
 import { PAGES } from "@/lib/seo";
-import { whatsappUrl } from "@/lib/site-data";
+import { PHONE_DISPLAY, PHONE_E164, whatsappUrl } from "@/lib/site-data";
 
 // Real routes, not homepage anchors. Anchors gave the new pages no inbound
 // links at all, so nothing crawling the homepage could reach them. The two
@@ -40,7 +40,7 @@ export function Navigation() {
           {links.map(([label, href]) => <Link key={href} href={href} className="focus-ring py-2 text-[.7rem] font-semibold uppercase tracking-[.1em] text-muted underline-offset-8 transition-colors hover:text-gold hover:underline hover:decoration-gold/40">{label}</Link>)}
         </nav>
         <div className="hidden items-center gap-3 lg:flex">
-          <a href="tel:+27636021868" className="focus-ring inline-flex items-center gap-2 px-3 py-2 text-xs font-semibold"><Phone size={15} aria-hidden="true" />063 602 1868</a>
+          <a href={`tel:${PHONE_E164}`} className="focus-ring inline-flex items-center gap-2 px-3 py-2 text-xs font-semibold"><Phone size={15} aria-hidden="true" />{PHONE_DISPLAY}</a>
           <Link href="/#join" className="focus-ring bg-charcoal px-5 py-3 text-xs font-bold uppercase tracking-widest text-cream hover:bg-gold">Join Nyoni</Link>
         </div>
         <button type="button" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="mobile-menu" aria-label={open ? "Close menu" : "Open menu"} className="focus-ring grid size-11 place-items-center border border-charcoal/20 lg:hidden">
@@ -53,7 +53,7 @@ export function Navigation() {
           <Link href="/#join" onClick={() => setOpen(false)} className="mt-6 bg-charcoal px-5 py-4 text-center text-sm font-bold uppercase tracking-widest text-cream hover:bg-gold">Join Nyoni</Link>
           <div className="mt-4 grid grid-cols-2 gap-3">
             <a href={whatsappUrl("Hello Nyoni, I would like help with membership.")} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="flex min-h-12 items-center justify-center gap-2 border border-charcoal/25 text-sm font-semibold hover:border-gold hover:text-gold"><MessageCircle size={16} />WhatsApp</a>
-            <a href="tel:+27636021868" className="flex min-h-12 items-center justify-center gap-2 border border-charcoal/25 text-sm font-semibold hover:border-gold hover:text-gold"><Phone size={16} />063 602 1868</a>
+            <a href={`tel:${PHONE_E164}`} className="flex min-h-12 items-center justify-center gap-2 border border-charcoal/25 text-sm font-semibold hover:border-gold hover:text-gold"><Phone size={16} />{PHONE_DISPLAY}</a>
           </div>
         </nav>
       </div>

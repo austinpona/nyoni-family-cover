@@ -1,5 +1,5 @@
 import { MessageCircle } from "lucide-react";
-import { whatsappUrl } from "@/lib/site-data";
+import { PHONE_DISPLAY, whatsappUrl } from "@/lib/site-data";
 
 // Exported so /faq can build its FAQPage JSON-LD from the same array the page
 // renders. Markup that disagrees with the visible answer is the usual reason
@@ -12,7 +12,7 @@ export const faqs = [
   ["When are benefits delivered?", "Qualifying benefits are provided within two days after verification."],
   ["Why is there a six-month waiting period?", "It protects members who are already paying. Without it, someone could join in the week they need to claim, and the fund could not support families who have contributed for years. It applies to everyone equally."],
   ["Are add-ons included in the basic price?", "No. On the Go and Food Support are separate options at R70 per month each."],
-  ["How can I contact Nyoni?", "Call or WhatsApp Nyoni on 063 602 1868."],
+  ["How can I contact Nyoni?", `Call or WhatsApp Nyoni on ${PHONE_DISPLAY}.`],
 ] as const;
 
 export function Faq() {

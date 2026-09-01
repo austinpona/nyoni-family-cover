@@ -8,12 +8,13 @@ import { WhatsAppFloat } from "@/components/whatsapp-float";
 import { WhoWeAre } from "@/components/who-we-are";
 import { organizationSchema } from "@/lib/schema";
 import { PAGES, pageMetadata } from "@/lib/seo";
+import { PHONE_DISPLAY } from "@/lib/site-data";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact Nyoni | Funeral Support in Limpopo",
   absoluteTitle: true,
   description:
-    "Call or WhatsApp Nyoni on 063 602 1868 for membership, add-ons, applications or claims. Run from Phalaborwa and serving families across Limpopo.",
+    `Call or WhatsApp Nyoni on ${PHONE_DISPLAY} for membership, add-ons, applications or claims. Run from Phalaborwa and serving families across Limpopo.`,
   path: PAGES.contact.path,
 });
 
