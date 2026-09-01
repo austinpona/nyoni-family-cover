@@ -8,13 +8,17 @@
 // transitive dependency for image optimisation.
 //
 // ---------------------------------------------------------------------------
-// The defect in the source asset that everything here works around
+// Source file, and the defect that used to be worked around here
 //
-// public/images/nyoni-logo.png is 1100x1430 with NO alpha channel. Its
-// "transparent" background is a checkerboard pattern baked into the pixels —
-// someone exported a transparent PNG flattened against the editor's preview
-// grid. Flattening or trimming cannot help, because the checker is real image
-// data.
+// SOURCE is nyoni-logo-source.png — a clean 1280x1215 export supplied by Austin
+// on 1 September 2026, measured as a perfectly flat white background.
+//
+// The file it replaced, public/images/nyoni-logo.png, had a checkerboard
+// pattern baked into its pixels: someone had exported a transparent PNG
+// flattened against the editor's preview grid, so the checker was real image
+// data that no amount of flattening or trimming could remove. That file is
+// still referenced by the in-page logo components and should be retired there
+// too.
 //
 // So the two pieces of the logo are lifted out separately and recomposed:
 //
@@ -33,15 +37,15 @@
 import sharp from "sharp";
 import { mkdir, writeFile } from "node:fs/promises";
 
-const SOURCE = "public/images/nyoni-logo.png";
+const SOURCE = "public/images/nyoni-logo-source.png";
 const DEEP_BLACK = "#181714";
 const CREAM = "#f7f3ea";
 const NAVY = "#12233f";
 const LIGHT_GOLD = "#c5a165";
 
 /** Measured from the source by scanning for bands of dark pixels. */
-const ROUNDEL = { left: 103, top: 127, width: 900, height: 900 };
-const WORDMARK = { left: 220, top: 1052, width: 660, height: 154 };
+const ROUNDEL = { left: 189, top: 65, width: 900, height: 900 };
+const WORDMARK = { left: 320, top: 1057, width: 640, height: 150 };
 
 await mkdir("public/icons", { recursive: true });
 
