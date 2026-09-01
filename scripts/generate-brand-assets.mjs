@@ -204,51 +204,56 @@ const card = `<svg width="${OG_W}" height="${OG_H}" xmlns="http://www.w3.org/200
   <rect width="${OG_W}" height="${OG_H}" fill="${DEEP_BLACK}"/>
   <rect x="0" y="0" width="${OG_W}" height="7" fill="${LIGHT_GOLD}"/>
   <g font-family="Georgia, 'Times New Roman', serif">
-    <text x="540" y="232" font-size="56" fill="#ffffff">Funeral cover</text>
-    <text x="540" y="294" font-size="56" fill="#ffffff">in Limpopo,</text>
-    <text x="540" y="356" font-size="56" font-style="italic" fill="#e2c99c">from R100 a month.</text>
+    <text x="500" y="232" font-size="56" fill="#ffffff">Funeral cover</text>
+    <text x="500" y="294" font-size="56" fill="#ffffff">in Limpopo,</text>
+    <text x="500" y="356" font-size="56" font-style="italic" fill="#e2c99c">from R100 a month.</text>
   </g>
   <g font-family="Arial, Helvetica, sans-serif" fill="#ffffff" fill-opacity=".72" font-size="25">
-    <text x="540" y="429">One cow. 100kg of maize meal.</text>
-    <text x="540" y="465">Firewood. A bakkie for the day.</text>
+    <text x="500" y="429">One cow. 100kg of maize meal.</text>
+    <text x="500" y="465">Firewood. A bakkie for the day.</text>
   </g>
-  <rect x="540" y="504" width="64" height="2" fill="${LIGHT_GOLD}"/>
-  <text x="540" y="552" font-family="Arial, Helvetica, sans-serif" font-size="21" letter-spacing="3" fill="${LIGHT_GOLD}">AFTER SIX PAID MONTHS</text>
+  <rect x="500" y="504" width="64" height="2" fill="${LIGHT_GOLD}"/>
+  <text x="500" y="552" font-family="Arial, Helvetica, sans-serif" font-size="21" letter-spacing="3" fill="${LIGHT_GOLD}">AFTER SIX PAID MONTHS</text>
 </svg>`;
 
-const ogMark = await emblem(OG_MARK);
-const ogWord = await wordmark(OG_WORD);
-const ogWordH = (await sharp(ogWord).metadata()).height;
+/*
+  The logo goes on the card as the real lockup on cream, and is not recoloured.
 
-// Emblem over wordmark on the left, sitting on a cream disc so the navy reads
-// against the dark card.
-const discD = OG_MARK + 34;
-const ogDisc = Buffer.from(
-  `<svg width="${discD}" height="${discD}" xmlns="http://www.w3.org/2000/svg"><circle cx="${discD / 2}" cy="${discD / 2}" r="${discD / 2}" fill="${CREAM}"/></svg>`,
-);
-const discTop = 150;
-const discLeft = 130;
+  An earlier version painted the NYONI wordmark in light gold so it would read
+  against the dark ground. That broke two BRAND.md rules at once — "the logo is
+  never recoloured" and "do not introduce the logo's amber as a type colour" —
+  and the brand system is explicit that the logo is placed as-is with the
+  palette arranged around it, never the other way round. So the panel is cream
+  and the mark sits on it untouched, which is also what "always on cream, never
+  on a photograph" asks for.
+*/
+const PANEL_W = 330;
+const PANEL_H = 400;
+const panelTop = Math.round((OG_H - PANEL_H) / 2);
+const panelLeft = 100;
+
+const ogMark = await emblem(OG_MARK - 40);
+const ogWord = await wordmark(OG_WORD - 40);
+const markD = OG_MARK - 40;
+
+const panel = await sharp({
+  create: { width: PANEL_W, height: PANEL_H, channels: 4, background: CREAM },
+})
+  .composite([
+    { input: ogMark, top: 34, left: Math.round((PANEL_W - markD) / 2) },
+    {
+      input: ogWord,
+      top: 34 + markD + 22,
+      left: Math.round((PANEL_W - (OG_WORD - 40)) / 2),
+    },
+  ])
+  .png()
+  .toBuffer();
 
 await sharp({ create: { width: OG_W, height: OG_H, channels: 4, background: DEEP_BLACK } })
   .composite([
     { input: Buffer.from(card), top: 0, left: 0 },
-    { input: ogDisc, top: discTop, left: discLeft },
-    { input: ogMark, top: discTop + 17, left: discLeft + 17 },
-    {
-      input: await sharp(ogWord)
-        .composite([
-          {
-            input: Buffer.from(
-              `<svg width="${OG_WORD}" height="${ogWordH}"><rect width="${OG_WORD}" height="${ogWordH}" fill="${LIGHT_GOLD}"/></svg>`,
-            ),
-            blend: "in",
-          },
-        ])
-        .png()
-        .toBuffer(),
-      top: discTop + discD + 34,
-      left: discLeft + Math.round((discD - OG_WORD) / 2),
-    },
+    { input: panel, top: panelTop, left: panelLeft },
   ])
   .png()
   .toFile("src/app/opengraph-image.png");

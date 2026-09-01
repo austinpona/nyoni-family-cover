@@ -33,7 +33,24 @@ interface Benefit {
   detail: string;
   image: string;
   alt: string;
+  /** Native pixel size. These are never upscaled — see the note below. */
+  width: number;
+  height: number;
   note?: string;
+}
+
+interface AddOnItem {
+  label: string;
+  image: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+interface AddOn {
+  name: string;
+  price: number;
+  items: readonly AddOnItem[];
 }
 
 export const packages: readonly MembershipPackage[] = [
@@ -44,11 +61,48 @@ export const packages: readonly MembershipPackage[] = [
   { members: 8, price: 300 },
 ] as const;
 
+/*
+  The images are extracted from Austin's own poster by
+  scripts/extract-poster-benefits.mjs. They are AI-rendered composites, not
+  photographs of Nyoni's goods, and they top out at 344px wide.
+
+  Two consequences, both deliberate:
+    - the layout uses them at or below native size, never upscaled
+    - the alt text describes the item, and never claims to be a photograph
+
+  They are placeholders until Austin's own delivery photographs arrive. When
+  they do, caption them the way who-we-are.tsx captions the cattle photo:
+  as what they are, on a stated date.
+*/
 export const benefits: readonly Benefit[] = [
-  { title: "One cow", detail: "1 × cow", image: "/images/benefits/cow.svg", alt: "A cow representing Nyoni's basic support benefit" },
-  { title: "Maize meal", detail: "2 × 50kg maize meal", image: "/images/benefits/maize-meal.svg", alt: "Two bags of maize meal for practical family support" },
-  { title: "Firewood", detail: "1 × full load of wood", image: "/images/benefits/firewood.svg", alt: "A full load of neatly stacked firewood" },
-  { title: "Bakkie service", detail: "1-day bakkie service", note: "You choose the day", image: "/images/benefits/bakkie.svg", alt: "A white bakkie providing community transport support" },
+  { title: "One cow", detail: "1 × cow", image: "/images/benefits/cow.webp", width: 188, height: 154, alt: "One cow, the largest single item in the basic benefits" },
+  { title: "Maize meal", detail: "2 × 50kg maize meal", image: "/images/benefits/maize-meal.webp", width: 156, height: 154, alt: "Two 50kg bags of maize meal" },
+  { title: "Firewood", detail: "1 × full load of wood", image: "/images/benefits/firewood.webp", width: 217, height: 154, alt: "A full load of firewood" },
+  { title: "Bakkie service", detail: "1-day bakkie service", note: "You choose the day", image: "/images/benefits/bakkie.webp", width: 236, height: 154, alt: "The bakkie provided for one day" },
+] as const;
+
+/**
+ * The two optional add-ons. R70 each per month, and NOT included in the basic
+ * price — that distinction is a claim-register rule, not a layout preference,
+ * so it must stay visible wherever these appear.
+ */
+export const addOns: readonly AddOn[] = [
+  {
+    name: "On the Go",
+    price: 70,
+    items: [
+      { label: "20 loaves of bread per day", image: "/images/benefits/bread.webp", width: 344, height: 116, alt: "Twenty loaves of bread" },
+    ],
+  },
+  {
+    name: "Food Support",
+    price: 70,
+    items: [
+      { label: "6 × 5kg mixed-portion chicken", image: "/images/benefits/chicken.webp", width: 174, height: 116, alt: "Six 5kg packs of mixed-portion chicken" },
+      { label: "20 cabbages", image: "/images/benefits/cabbage.webp", width: 157, height: 116, alt: "Twenty cabbages" },
+      { label: "5 × 10kg bags of potatoes", image: "/images/benefits/potatoes.webp", width: 179, height: 116, alt: "Five 10kg bags of potatoes" },
+    ],
+  },
 ] as const;
 
 // Wording here is bound to the claim register (nyoni marketing tean/CLAIMS.md)

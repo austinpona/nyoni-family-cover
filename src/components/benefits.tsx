@@ -1,49 +1,137 @@
-import { ArrowRight, Check } from "lucide-react";
-import { benefits } from "@/lib/site-data";
+import Image from "next/image";
+import { Check } from "lucide-react";
+import { addOns, benefits } from "@/lib/site-data";
 import { Reveal } from "./reveal";
+
+/*
+  The manifest.
+
+  This section answers the only question that matters on this site: what
+  actually arrives. Until now it answered it in words alone, which for a
+  product that is literally a cow, four bags and a bakkie was the weakest
+  possible way to say it.
+
+  Three constraints from DESIGN.md shaped the layout:
+
+  1. "Never let three light sections run consecutively." This section is now
+     dark, which fixes the run on /funeral-cover-limpopo as a side effect.
+  2. "Three identical feature cards" is banned, and so is an identical card
+     grid. The four tiles are deliberately unequal — two wide, two narrow,
+     alternating — which also suits the images, all of which are landscape.
+  3. Gold stays under ~10%. It appears on the eyebrow, one serif phrase in the
+     heading, and the add-on prices. Nowhere else.
+
+  The tiles are cream on the dark ground because the product images already sit
+  on cream, and because the logo rule in BRAND.md — never place the mark on a
+  photograph — sets the same instinct for the goods.
+*/
+
+const TILE = "group relative overflow-hidden rounded-xl bg-soft-cream";
+const TILE_IMAGE = "flex items-center justify-center px-6 pt-7 pb-3";
+const TILE_FOOT = "flex items-baseline justify-between gap-3 border-t border-charcoal/12 px-6 py-4";
+
+/** Wide tiles take the landscape images; narrow ones take the squarer pair. */
+const SPAN = ["sm:col-span-3", "sm:col-span-2", "sm:col-span-2", "sm:col-span-3"];
 
 export function Benefits() {
   return (
-    <section id="benefits" className="paper-grain bg-cream pb-20 sm:pb-28">
+    <section id="benefits" className="section-pad bg-deep-black text-cream">
       <div className="container-shell">
-        <div className="relative overflow-hidden rounded-xl bg-deep-black shadow-[0_30px_80px_-55px_rgba(41,40,37,.65)]">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_85%_20%,rgba(197,161,101,.18),transparent_55%),radial-gradient(ellipse_at_5%_100%,rgba(137,102,47,.14),transparent_50%)]" aria-hidden="true" />
-          <span className="serif-accent absolute -right-6 bottom-[-3rem] hidden select-none text-[16rem] leading-none text-light-gold/8 sm:block" aria-hidden="true">04</span>
-          <Reveal className="relative z-10 max-w-2xl p-7 text-cream sm:p-12 lg:p-16">
-            <p className="eyebrow text-light-gold">Basic benefits</p>
-            <h2 className="display-title mt-4 text-5xl sm:text-7xl">Practical help, <span className="serif-accent text-[#e2c99c]">clearly defined.</span></h2>
-            <p className="mt-5 max-w-md leading-7 text-cream/80">Qualifying members receive the following support after verification.</p>
-          </Reveal>
-        </div>
-        {/* Ledger rows, not a 4-up card grid: equal feature columns are the AI tell. */}
-        <ol className="border-b border-charcoal/15">
+        <Reveal className="max-w-3xl">
+          <p className="eyebrow text-light-gold">Basic benefits</p>
+          <h2 className="display-title mt-4 text-5xl sm:text-7xl">
+            Not a promise. <span className="serif-accent text-[#e2c99c]">A delivery.</span>
+          </h2>
+          <p className="mt-5 max-w-xl leading-7 text-cream/75">
+            Every membership option includes the same four things. This is the whole list —
+            there is no tier that gets more, and nothing here is decided later.
+          </p>
+        </Reveal>
+
+        <ol className="mt-12 grid gap-4 sm:grid-cols-5">
           {benefits.map((benefit, index) => (
-            <Reveal key={benefit.title} delay={index * .05}>
-              <li className="group grid items-baseline gap-x-6 gap-y-1 border-t border-charcoal/15 py-7 transition-colors hover:bg-gold/5 sm:grid-cols-[4rem_1fr_auto] sm:py-8">
-                <span className="font-display text-3xl text-gold/60 transition-colors group-hover:text-gold sm:text-4xl">0{index + 1}</span>
-                <div>
-                  <h3 className="font-display text-3xl uppercase leading-none sm:text-4xl">{benefit.title}</h3>
-                  {benefit.note && <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-gold">{benefit.note}</p>}
-                </div>
-                <p className="text-sm text-muted sm:text-right sm:text-base">{benefit.detail}</p>
-              </li>
-            </Reveal>
+            <li key={benefit.title} className={SPAN[index]}>
+              <Reveal delay={index * 0.05}>
+                <article className={TILE}>
+                  <div className={TILE_IMAGE}>
+                    <Image
+                      src={benefit.image}
+                      alt={benefit.alt}
+                      width={benefit.width}
+                      height={benefit.height}
+                      sizes="(min-width: 640px) 22rem, 90vw"
+                      className="h-32 w-auto object-contain sm:h-36"
+                    />
+                  </div>
+                  <div className={TILE_FOOT}>
+                    <div>
+                      <h3 className="font-display text-2xl uppercase leading-none text-charcoal sm:text-3xl">
+                        {benefit.title}
+                      </h3>
+                      {benefit.note && (
+                        <p className="mt-1.5 text-[.68rem] font-semibold uppercase tracking-wider text-gold">
+                          {benefit.note}
+                        </p>
+                      )}
+                    </div>
+                    <p className="shrink-0 text-sm text-muted">{benefit.detail}</p>
+                  </div>
+                  <span
+                    aria-hidden="true"
+                    className="absolute right-4 top-3 font-display text-sm text-charcoal/25"
+                  >
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </article>
+              </Reveal>
+            </li>
           ))}
         </ol>
-        <div className="mt-16 grid gap-8 border-y border-charcoal/15 py-10 lg:grid-cols-[.65fr_1.35fr]">
-          <div><p className="eyebrow">Optional add-ons</p><h2 className="display-title mt-4 text-4xl sm:text-5xl">Add more practical help.</h2><p className="mt-4 text-sm leading-6 text-muted">These are separate add-ons. They are not included in the basic monthly price.</p></div>
-          {/* Deliberately asymmetric: matched twin cards read as a template. */}
-          <div className="grid gap-x-10 gap-y-8 sm:grid-cols-[.85fr_1.15fr]">
-            <Reveal className="border-t border-charcoal/20 pt-6">
-              <div className="flex items-baseline justify-between gap-4"><h3 className="font-display text-3xl uppercase">On the Go</h3><p className="font-display text-3xl text-gold">R70<span className="font-sans text-xs text-muted"> pm</span></p></div>
-              <p className="mt-5 flex gap-2 text-sm text-muted"><Check size={17} className="shrink-0 text-gold" />20 loaves of bread per day</p>
-              <a href="#join" className="focus-ring mt-7 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gold hover:underline hover:underline-offset-4">Add to application <ArrowRight size={15} /></a>
-            </Reveal>
-            <Reveal className="border-t-2 border-charcoal pt-6">
-              <div className="flex items-baseline justify-between gap-4"><h3 className="font-display text-3xl uppercase sm:text-4xl">Food Support</h3><p className="font-display text-3xl text-gold sm:text-4xl">R70<span className="font-sans text-xs text-muted"> pm</span></p></div>
-              <ul className="mt-5 grid gap-2 text-sm text-muted sm:grid-cols-2"><li className="flex gap-2"><Check size={17} className="shrink-0 text-gold" />6 × 5kg mixed-portion chicken</li><li className="flex gap-2"><Check size={17} className="shrink-0 text-gold" />20 cabbages</li><li className="flex gap-2"><Check size={17} className="shrink-0 text-gold" />5 × 10kg bags of potatoes</li></ul>
-              <a href="#join" className="focus-ring mt-7 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gold hover:underline hover:underline-offset-4">Add to application <ArrowRight size={15} /></a>
-            </Reveal>
+
+        {/* Add-ons sit quieter than the manifest on purpose: they are optional,
+            they cost extra, and the claim register requires that never read as
+            part of the basic price. */}
+        <div className="mt-16 grid gap-10 border-t border-white/12 pt-12 lg:grid-cols-[.6fr_1.4fr]">
+          <Reveal>
+            <p className="eyebrow text-light-gold">Optional add-ons</p>
+            <h3 className="display-title mt-4 text-4xl sm:text-5xl">Add more practical help.</h3>
+            <p className="mt-4 max-w-sm text-sm leading-6 text-cream/70">
+              Separate from the basic price, and separate from each other. R70 a month each.
+            </p>
+          </Reveal>
+
+          <div className="grid gap-8 sm:grid-cols-2">
+            {addOns.map((addOn, index) => (
+              <Reveal key={addOn.name} delay={index * 0.05} className="border-t border-white/12 pt-6">
+                <div className="flex items-baseline justify-between gap-4">
+                  <h4 className="font-display text-3xl uppercase">{addOn.name}</h4>
+                  <p className="font-display text-3xl text-light-gold">
+                    R{addOn.price}
+                    <span className="ml-1 font-sans text-xs text-cream/60">pm</span>
+                  </p>
+                </div>
+                <ul className="mt-5 grid gap-3">
+                  {addOn.items.map((item) => (
+                    <li key={item.label} className="flex items-center gap-3">
+                      <span className="grid size-14 shrink-0 place-items-center overflow-hidden rounded-lg bg-soft-cream">
+                        <Image
+                          src={item.image}
+                          alt={item.alt}
+                          width={item.width}
+                          height={item.height}
+                          sizes="56px"
+                          className="h-10 w-auto object-contain"
+                        />
+                      </span>
+                      <span className="flex items-center gap-2 text-sm text-cream/80">
+                        <Check size={15} className="shrink-0 text-light-gold" aria-hidden="true" />
+                        {item.label}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            ))}
           </div>
         </div>
       </div>

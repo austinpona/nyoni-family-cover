@@ -4,6 +4,7 @@ import { Footer } from "@/components/footer";
 import { JsonLd } from "@/components/json-ld";
 import { Navigation } from "@/components/navigation";
 import { PageHeader } from "@/components/page-header";
+import { TrustStrip } from "@/components/trust-strip";
 import { WhatsAppFloat } from "@/components/whatsapp-float";
 import { WhoWeAre } from "@/components/who-we-are";
 import { organizationSchema } from "@/lib/schema";
@@ -56,6 +57,10 @@ export default function ContactPage() {
           }
         />
         <Contact />
+        {/* Breaks a run of three light sections, which DESIGN.md forbids, and
+            earns its place here: someone on the contact page is deciding
+            whether to call, and these are the terms they are deciding on. */}
+        <TrustStrip />
         <WhoWeAre />
       </main>
       <Footer />
